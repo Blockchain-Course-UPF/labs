@@ -4,3 +4,4 @@ __pycache__
 .hypothesis/
 build/
 reports/
+lab1/tests/test_helicopter.py

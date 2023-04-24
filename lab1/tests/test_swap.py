@@ -2,7 +2,7 @@ import pytest
 from brownie import Wei, reverts
 
 def test_token_swap(accounts, MyToken, TokenSwap):
-    initial_supply = 1000000 * 10**18
+    initial_supply = 1000000
     deployer = accounts[0]
     token_seller = accounts[1]
     eth_buyer = accounts[2]

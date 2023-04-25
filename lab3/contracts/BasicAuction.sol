@@ -3,7 +3,7 @@ pragma solidity ^0.8.0;
 import "../interfaces/IERC20.sol";
 
 contract Auction {
-    address payable public owner;
+    address payable public seller;
     uint256 public startBlock;
     uint256 public endBlock;
     uint256 public highestBid=0;
@@ -24,7 +24,7 @@ contract Auction {
         address _tokenAddress,
         uint256 _auctionAmount 
     ) {
-        owner = payable(msg.sender);
+        seller = payable(msg.sender);
         startBlock = _startBlock;
         endBlock = _endBlock;
         token = IERC20(_tokenAddress);
@@ -47,14 +47,14 @@ contract Auction {
         emit HighestBidIncreased(highestBidder, highestBid);
     }
 
-    function endAuction() public payable {
-        require(msg.sender == owner, "Only the owner can end the auction");
+    function endAuction() public{
+        require(msg.sender == seller, "Only the seller can end the auction");
         require(block.number > endBlock, "Auction has not ended yet");
         require(!ended, "Auction has already ended");
 
         ended = true;
         emit AuctionEnded(highestBidder, highestBid);
-        owner.transfer(highestBid);
+        seller.transfer(highestBid);
         token.transfer(highestBidder, auctionAmount);
     }
 }

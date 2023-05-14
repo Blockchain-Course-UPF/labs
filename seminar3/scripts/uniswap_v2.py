@@ -38,3 +38,24 @@ price2 = reserve1 / reserve2
 
 print(f"Price: 1 DAI = {price} ETH")
 print(f"Price: 1 ETH = {price2} DAI")
+
+
+
+# Get the PairCreated events
+pair_created_filter = UniswapV2Factory.events.PairCreated.createFilter(fromBlock=10000835, toBlock=10000835+10**5)
+
+pair_created_events = pair_created_filter.get_all_entries()
+
+# Print the first few PairCreated events
+for i, event in enumerate(pair_created_events):
+    print(f"Event {i + 1}:")
+    print(f"  token0: {event['args']['token0']}")
+    print(f"  token1: {event['args']['token1']}")
+    print(f"  pair: {event['args']['pair']}")
+    print(f"  ----")
+
+    # Stop after printing first few events
+    if i >= 10:
+        break
+
+

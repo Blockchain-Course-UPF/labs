@@ -31,14 +31,3 @@ def test_token_swap(accounts, TokenERC20, constantPriceDEX,basicUniswapV2, Extra
 
     # trader2 uses DEX 2 to buy tokens
     dex2.buyToken(0,{"from":trader2, 'value':1*10**18 })
-    print(dex2.balance(), token.balanceOf(dex2), token.balanceOf(dex2)/dex2.balance())
-
-    # trader1 tries to execute a profitable trade
-    initialBalanceT1=trader1.balance()
-    
-    dex1.buyToken({"from":trader1, 'value':5*10**17 })
-    dex2.sellToken(token.balanceOf(trader1),0,{"from":trader1 })
-
-    profit=trader1.balance()-initialBalanceT1
-
-    print("profit ",profit/10**18)

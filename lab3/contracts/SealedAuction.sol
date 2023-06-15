@@ -56,7 +56,8 @@ contract SealedBidAuction {
         } else {
             payable(msg.sender).send(collateral);
         }
-        bids[msg.sender]=0;
+        // For the final exercise, the following should have been commented out
+        // bids[msg.sender]=0;
         
     }
     function auctionEnd() public {
